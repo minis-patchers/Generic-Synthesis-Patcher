@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
 {
-    public abstract class LeveledEntryData<TMajor, TData> (short count, short level) : BaseLeveledEntryData<TMajor, TData>(count, level)
+    public abstract class LeveledEntryData<TMajor, TData>(short count, short level) : BaseLeveledEntryData<TMajor, TData>(count, level)
         where TMajor : class, IMajorRecordQueryableGetter, IMajorRecordGetter
         where TData : class, IFormLinkContainer
     {
@@ -21,7 +21,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
         [JsonProperty(PropertyName = "Owner")]
         public OwnerBase? Owner { get; set; }
 
-        protected ExtraData? createExtraData ()
+        protected ExtraData? createExtraData()
         {
             if (Owner is null && ItemCondition == -1)
             {
@@ -32,7 +32,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
             var extraData = new ExtraData
             {
                 ItemCondition = ItemCondition,
-                Owner = Owner?.ToActionData() ?? new NoOwner(),
+                Owner = Owner?.ToActionData() ?? new UntypedOwner(),
             };
 
             return extraData;

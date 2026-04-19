@@ -18,7 +18,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
     {
         private const int ClassLogCode = 0xA3;
 
-        protected ExtraData? createExtraData (ILoquiObject source)
+        protected ExtraData? createExtraData(ILoquiObject source)
         {
             if (!Mod.TryGetProperty<IExtraDataGetter>(source, "ExtraData", out var sourceData, ClassLogCode) || sourceData is null)
             {
@@ -52,7 +52,7 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Action
                     break;
 
                 default:
-                    extraData.Owner = new NoOwner();
+                    extraData.Owner = new UntypedOwner();
                     break;
             }
 

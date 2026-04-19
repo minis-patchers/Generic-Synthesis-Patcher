@@ -15,25 +15,25 @@ namespace GenericSynthesisPatcher.Games.Skyrim.Json.Action
         [JsonProperty(PropertyName = "RequiredRank")]
         public int RequiredRank { get; set; }
 
-        public override bool Equals (object? obj) => Equals(obj as FactionOwner);
+        public override bool Equals(object? obj) => Equals(obj as FactionOwner);
 
-        public bool Equals (FactionOwner? other)
+        public bool Equals(FactionOwner? other)
             => other is not null
             && RequiredRank == other.RequiredRank
             && object.Equals(Faction, other.Faction);
 
-        public override int GetHashCode ()
+        public override int GetHashCode()
         {
-            var hash = new HashCode ();
+            var hash = new HashCode();
             hash.Add(Faction);
             hash.Add(RequiredRank);
             return hash.ToHashCode();
         }
 
-        public override OwnerTarget ToActionData ()
+        public override OwnerTarget ToActionData()
         {
             if (Faction is null || Faction.Value == FormKey.Null)
-                return new NoOwner();
+                return new UntypedOwner();
 
             var owner = new Mutagen.Bethesda.Skyrim.FactionOwner
             {
